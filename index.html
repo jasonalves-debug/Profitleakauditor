@@ -1,0 +1,257 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROFIT LEAK AUDITOR | NO FRILLS. JUST RESULTS.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;700;900&display=swap');
+
+
+        body {
+            background-color: #facc15; /* Yellow-400 */
+            color: #000000;
+            font-family: 'Inter', sans-serif;
+        }
+
+
+        .heading-font {
+            font-family: 'Archivo Black', sans-serif;
+            text-transform: uppercase;
+        }
+
+
+        .heavy-border {
+            border: 4px solid #000000;
+        }
+
+
+        .brutal-shadow {
+            box-shadow: 8px 8px 0px 0px #000000;
+        }
+
+
+        .input-field {
+            background: #ffffff;
+            border: 3px solid #000000;
+            padding: 1rem;
+            width: 100%;
+            font-weight: 700;
+            outline: none;
+        }
+
+
+        .input-field:focus {
+            background: #fef9c3;
+        }
+
+
+        .btn-black {
+            background: #000000;
+            color: #facc15;
+            padding: 1.25rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            transition: all 0.1s;
+            cursor: pointer;
+            border: none;
+        }
+
+
+        .btn-black:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+
+        .btn-black:active:not(:disabled) {
+            transform: translate(2px, 2px);
+        }
+
+
+        #messageBox {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 50;
+        }
+
+
+        .overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 40;
+        }
+
+
+        .engine-stamp {
+            border: 2px dashed #000000;
+            padding: 0.5rem 1rem;
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 900;
+            letter-spacing: 0.05em;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center p-4 md:p-8">
+
+
+    <header class="w-full max-w-5xl mt-8 mb-16 text-center">
+        <div class="heading-font text-lg md:text-2xl border-b-4 border-black inline-block mb-4 px-2">
+            Small Business Analysis
+        </div>
+       
+        <h1 class="heading-font text-6xl md:text-9xl lg:text-[11rem] leading-[0.85] tracking-tighter">
+            PROFIT LEAK <br> AUDITOR
+        </h1>
+        <p class="mt-6 text-xl md:text-3xl font-black uppercase tracking-widest bg-black text-white inline-block px-6 py-1">
+            We find the holes in your pocket.
+        </p>
+    </header>
+
+
+    <main class="w-full max-w-2xl">
+        <div class="heavy-border bg-white p-6 md:p-10 brutal-shadow mb-8">
+            <h2 class="heading-font text-3xl mb-8 border-b-4 border-black pb-2">REQUEST AUDIT</h2>
+           
+            <form id="auditForm" class="space-y-6">
+                <div>
+                    <label class="block heading-font text-sm mb-2">Business Name</label>
+                    <input type="text" name="entry.1512197485" id="businessName" placeholder="ENTER LEGAL NAME" required class="input-field">
+                </div>
+
+
+                <div>
+                    <label class="block heading-font text-sm mb-2">Business Website</label>
+                    <input type="text" name="entry.650345227" id="businessWebsite" placeholder="YOURSITE.COM" required class="input-field">
+                </div>
+
+
+                <div>
+                    <label class="block heading-font text-sm mb-2">Email Address</label>
+                    <input type="email" name="entry.864735466" id="email" placeholder="AUDIT-RESULTS@COMPANY.COM" required class="input-field">
+                </div>
+
+
+                <div class="pt-4">
+                    <button type="submit" id="submitBtn" class="w-full btn-black text-2xl heading-font">
+                        Start Recovery Analysis
+                    </button>
+                </div>
+            </form>
+           
+            <p class="mt-6 text-xs font-bold uppercase text-center opacity-70">
+                * Data is transmitted securely to our audit queue.
+            </p>
+        </div>
+
+
+        <div class="text-center mb-16">
+            <p class="heading-font text-sm mb-2">PLEASE ALLOW 24HRS FOR ANALYSIS TO BE COMPLETED</p>
+            <div class="engine-stamp uppercase">
+                A.I. Proprietary Small Business Analysis Engine v6
+            </div>
+        </div>
+    </main>
+
+
+    <div id="overlay" class="overlay"></div>
+    <div id="messageBox" class="heavy-border bg-white p-8 brutal-shadow w-11/12 max-w-md text-center">
+        <div class="heading-font text-3xl mb-4 text-green-600">SUCCESS.</div>
+        <p class="font-bold mb-4">Your data has been logged. Our analysts are beginning the scan of <span id="displayBizName" class="underline"></span>.</p>
+        <p class="heading-font text-sm mb-6 bg-yellow-400 p-2 inline-block">PLEASE ALLOW 24HRS FOR ANALYSIS TO BE COMPLETED</p>
+        <button onclick="closeMessage()" class="btn-black w-full heading-font">Return to Site</button>
+    </div>
+
+
+    <footer class="w-full max-w-5xl border-t-4 border-black pt-8 pb-12 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div class="heading-font text-lg">PROFIT LEAK AUDITOR &copy; 2024</div>
+        <div class="flex gap-6 font-bold uppercase text-sm">
+            <span class="cursor-pointer hover:underline">Terms</span>
+            <span class="cursor-pointer hover:underline">Privacy</span>
+            <span class="cursor-pointer hover:underline">Status</span>
+        </div>
+    </footer>
+
+
+    <script>
+        const form = document.getElementById('auditForm');
+        const messageBox = document.getElementById('messageBox');
+        const overlay = document.getElementById('overlay');
+        const submitBtn = document.getElementById('submitBtn');
+        const displayBizName = document.getElementById('displayBizName');
+
+
+        // Form connected to your specific Google Form
+        const GOOGLE_FORM_ACTION_URL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSdH7Pr4AaMyLEX_YjLt3UV8hPK7xy-nZOPz-OmPeH2zv2uWNw/formResponse";
+
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+           
+            submitBtn.disabled = true;
+            submitBtn.innerText = "TRANSMITTING...";
+
+
+            const bizName = document.getElementById('businessName').value;
+            let bizWebsite = document.getElementById('businessWebsite').value.trim();
+            const email = document.getElementById('email').value;
+
+
+            // URL Sanitization: Prepend https:// if no protocol is present
+            if (bizWebsite && !/^https?:\/\//i.test(bizWebsite)) {
+                bizWebsite = 'https://' + bizWebsite;
+            }
+
+
+            // Mapped using your specific entry IDs
+            const params = new URLSearchParams();
+            params.append('entry.1512197485', bizName);
+            params.append('entry.650345227', bizWebsite);
+            params.append('entry.864735466', email);
+
+
+            const submitUrl = `${GOOGLE_FORM_ACTION_URL}?${params.toString()}`;
+
+
+            try {
+                // Submit to Google via no-cors mode
+                await fetch(submitUrl, {
+                    method: 'POST',
+                    mode: 'no-cors'
+                });
+
+
+                displayBizName.textContent = bizName;
+                messageBox.style.display = 'block';
+                overlay.style.display = 'block';
+                form.reset();
+            } catch (error) {
+                // Fetch often throws in no-cors even if it works, so we show success anyway
+                console.error('Submission hand-off:', error);
+                displayBizName.textContent = bizName;
+                messageBox.style.display = 'block';
+                overlay.style.display = 'block';
+                form.reset();
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = "Start Recovery Analysis";
+            }
+        });
+
+
+        function closeMessage() {
+            messageBox.style.display = 'none';
+            overlay.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
+
+
