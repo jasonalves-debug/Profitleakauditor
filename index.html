@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PROFIT LEAK AUDITOR | NO FRILLS. JUST RESULTS.</title>
+    <title>PROFIT LEAK AUDITOR™ | NO FRILLS. JUST RESULTS.</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;700;900&family=Space+Mono&display=swap');
@@ -32,10 +32,6 @@
         /* BRUTALIST UI TOKENS */
         .heavy-border {
             border: 4px solid #000000;
-        }
-
-        .thin-border {
-            border: 2px solid #000000;
         }
 
         .brutal-shadow {
@@ -136,55 +132,41 @@
             user-select: none;
             -webkit-user-select: none;
         }
-
-        /* REPORT SPECIFIC STYLES */
-        .report-bg {
-            background-color: #f4f1ea;
-        }
-        
-        .report-blue {
-            color: #0c2340;
-        }
-
-        .report-orange {
-            color: #c05621;
-        }
-
-        .gauge-border {
-            border-width: 6px;
-            border-style: solid;
-        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center p-4 md:p-8">
 
-    <header class="w-full max-w-5xl mt-8 mb-16 text-center">
+    <header class="w-full max-w-5xl mt-6 mb-12 text-center">
         <!-- Brand Name -->
-        <h1 class="heading-font text-6xl md:text-9xl lg:text-[11rem] leading-[0.8] tracking-tighter mb-10">
-            PROFIT LEAK <br> AUDITOR
+        <h1 class="heading-font text-5xl md:text-8xl lg:text-[9rem] leading-[0.8] tracking-tighter mb-8">
+            PROFIT LEAK <br> AUDITOR<span class="text-lg md:text-xl align-top ml-1">™</span>
         </h1>
 
-        <!-- Headline Section -->
-        <div class="max-w-4xl mx-auto space-y-8">
-            <h2 class="heading-font text-3xl md:text-6xl leading-tight border-y-4 border-black py-4">
-                Is Your Business Losing 10–25% of Revenue Without You Knowing?
-            </h2>
-            
-            <div class="bg-black text-white p-6 md:p-8 heavy-border brutal-shadow">
-                <p class="text-lg md:text-2xl font-black uppercase tracking-tight leading-snug">
-                    Hidden friction in your website, marketing, or operations is quietly costing you money.
+        <!-- Combined Headline Section -->
+        <div class="max-w-4xl mx-auto space-y-6">
+            <div class="bg-black text-white p-6 md:p-10 heavy-border brutal-shadow">
+                <p class="text-xl md:text-3xl font-black uppercase tracking-tight leading-snug">
+                    Is hidden friction in your website, marketing, or operations costing you 10–25% of revenue without you knowing?
                 </p>
             </div>
 
-            <p class="text-xl md:text-3xl font-black uppercase tracking-widest bg-white inline-block px-4 border-2 border-black">
-                We pinpoint exactly where the leaks are and how to recover them.
+            <p class="text-lg md:text-2xl font-black uppercase tracking-widest bg-white inline-block px-4 border-2 border-black">
+                We pinpoint the leaks and show you how to recover them.
             </p>
         </div>
     </header>
 
     <main class="w-full max-w-2xl space-y-12 mb-20">
+        
+        <!-- SECTOR MANIFEST LINE -->
+        <div class="text-center mb-[-2rem] relative z-10">
+            <span class="mono-font text-[10px] font-black uppercase bg-black text-yellow-400 px-3 py-1 border-x-4 border-yellow-400">
+                Audit Targets: Food & Bev // Dental // Clinics // Retail // Trades // Prof. Services
+            </span>
+        </div>
+
         <!-- FREE SCAN SECTION -->
-        <div class="heavy-border bg-white p-6 md:p-10 brutal-shadow">
+        <div class="heavy-border bg-white p-6 md:p-10 brutal-shadow relative">
             <div class="mb-10 border-b-8 border-black pb-8">
                 <span class="dept-label">DEPT: DIAGNOSTICS</span>
                 <h3 class="heading-font text-4xl md:text-5xl mb-4 leading-none">Free Business Signal Scan</h3>
@@ -204,7 +186,7 @@
                     </div>
 
                     <p class="font-black text-[11px] uppercase opacity-60 bg-gray-100 p-2 border-l-4 border-black">
-                        System Protocol: No forms, no surveys. Just enter business name and website below.
+                        No forms, no surveys. Just enter business name and website below.
                     </p>
                 </div>
             </div>
@@ -272,14 +254,14 @@
             </div>
             
             <div class="mt-10 pt-8 border-t-2 border-yellow-400/20 text-center">
-                <p class="text-[11px] font-black uppercase text-yellow-400 tracking-widest">Access Protocol: Full audit unlocked after free snapshot delivery.</p>
+                <p class="text-[11px] font-black uppercase text-yellow-400 tracking-widest">Full audit unlocked after free snapshot delivery.</p>
             </div>
         </div>
 
         <!-- Tightened Bottom Section -->
         <div class="text-center flex flex-col items-center gap-6 pb-12">
             <div class="engine-stamp uppercase mono-font">
-                SYSTEM-STAMP: A.I. PROPRIETARY ANALYSIS ENGINE V6.0
+                A.I. PROPRIETARY ANALYSIS ENGINE V6.0
             </div>
             <div class="font-black uppercase text-xs tracking-widest bg-black text-yellow-400 px-4 py-2 border-2 border-white">
                 INQUIRIES: <a href="mailto:jasonalves@gmail.com" class="underline hover:text-white transition-colors">auditor@profitleakauditor.com</a>
@@ -291,7 +273,7 @@
     <div id="overlay" class="overlay" onclick="closeAllModals()"></div>
 
     <!-- Success Message Box -->
-    <div id="messageBox" class="modal-box heavy-border bg-white p-8 brutal-shadow w-11/12 max-w-lg text-center">
+    <div id="messageBox" class="modal-box heavy-border bg-white p-8 brutal-shadow w-11/12 max-lg text-center">
         <div class="heading-font text-4xl mb-6 text-green-600 border-b-4 border-green-600 pb-2">SCAN SUBMITTED ✅</div>
         <div class="font-black mb-8 uppercase text-sm md:text-base space-y-6">
             <p class="bg-black text-white p-2">Your business info is logged.</p>
@@ -301,164 +283,15 @@
         <button onclick="closeAllModals()" class="btn-black w-full heading-font brutal-shadow">Acknowledged</button>
     </div>
 
-    <!-- SAMPLE AUDIT MODAL (Updated from image) -->
-    <div id="sampleModal" class="modal-box heavy-border report-bg w-11/12 max-w-5xl no-select border-black" oncontextmenu="return false;">
-        <div class="p-4 md:p-12 report-blue">
-            <div class="flex justify-end mb-4">
-                <button onclick="closeAllModals()" class="font-black text-xs uppercase underline hover:opacity-50">Close Report [X]</button>
-            </div>
-
-            <!-- 1. Header Area -->
-            <div class="mb-12 border-b-4 border-black pb-8">
-                <h4 class="heading-font text-3xl md:text-5xl leading-none mb-6">Revenue Recovery Alert <br> for ABA Educator</h4>
-                <div class="flex flex-col md:flex-row gap-8 items-start">
-                    <div class="flex-1">
-                        <div class="report-orange text-7xl md:text-9xl font-black leading-none">$142,000</div>
-                        <p class="font-black uppercase text-xl md:text-2xl mt-[-5px]">Total Annualized Recovery Potential</p>
-                        <div class="mt-8">
-                            <svg viewBox="0 0 400 60" class="w-full opacity-30">
-                                <path d="M0,50 L50,55 L100,45 L150,48 L200,20 L250,25 L300,5 L350,10 L400,0" fill="none" stroke="currentColor" stroke-width="2" />
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="w-full md:w-80 bg-white/50 p-6 border-2 border-black font-bold text-xs md:text-sm italic leading-tight">
-                        <ul class="bullet-list space-y-4">
-                            <li>This represents the profit from 5 full-year therapy contracts currently being lost to competitors due strictly to intake friction.</li>
-                            <li>Conservative Baseline Recovery: $52,000 (1.5 contracts) through friction reduction in the first 90 days.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 2. Bottleneck Analysis -->
-            <div class="mb-12">
-                <h5 class="heading-font text-xl md:text-2xl mb-6">Top-tier clinical competence is bottlenecked by a locked digital front door</h5>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-0 border-4 border-black">
-                    <div class="p-8 bg-green-100/50 border-b-2 md:border-b-0 md:border-r-2 border-black flex flex-col items-center text-center">
-                        <div class="w-16 h-16 bg-black mb-4 flex items-center justify-center text-yellow-400">
-                             <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7v2h20V7l-10-5zM4 11v8h2v-8H4zm5 0v8h2v-8H9zm5 0v8h2v-8h-2zm5 0v8h2v-8h-2zM2 22h20v-2H2v2z"/></svg>
-                        </div>
-                        <p class="font-black uppercase text-lg mb-2">Experience Margin Model</p>
-                        <p class="text-xs mb-4">Prioritizing clinical outcomes and individualized care over transactional volume.</p>
-                        <p class="font-black text-xl">Alignment Score: 4/5</p>
-                    </div>
-                    <div class="p-8 bg-white flex flex-col items-center text-center">
-                        <div class="w-16 h-16 border-4 border-black mb-4 flex items-center justify-center">
-                             <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6z"/></svg>
-                        </div>
-                        <p class="font-black uppercase text-lg mb-2">The Intake Leak</p>
-                        <p class="text-xs mb-4">High-value, long-term contracts are lost annually because parents lack visual trust signals and encounter friction.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 3. Friction Indices -->
-            <div class="mb-12">
-                <h5 class="heading-font text-xl md:text-2xl mb-8">Digital intake friction is actively suppressing 12-20% of potential revenue</h5>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center mb-8">
-                    <div class="flex flex-col items-center">
-                        <div class="w-20 h-20 border-8 border-black flex items-center justify-center font-black text-4xl">B</div>
-                        <p class="mt-2 font-black text-[10px] uppercase">Overall Grade</p>
-                    </div>
-                    <div class="flex flex-col items-center">
-                        <div class="w-20 h-20 border-8 border-orange-700 flex items-center justify-center font-black text-4xl">54</div>
-                        <p class="mt-2 font-black text-[10px] uppercase">Friction Index</p>
-                    </div>
-                    <div class="flex flex-col items-center">
-                        <div class="w-20 h-20 border-8 border-green-700 flex items-center justify-center font-black text-4xl">72</div>
-                        <p class="mt-2 font-black text-[10px] uppercase">Opportunity Score</p>
-                    </div>
-                    <div class="flex flex-col items-center">
-                        <div class="w-20 h-20 border-8 border-orange-500 flex items-center justify-center font-black text-xs px-1">MEDIUM</div>
-                        <p class="mt-2 font-black text-[10px] uppercase">Revenue Risk</p>
-                    </div>
-                </div>
-                <div class="border-4 border-black p-4 bg-white text-center shadow-[8px_8px_0px_0px_#000]">
-                    <p class="font-black text-2xl md:text-4xl uppercase">Estimated Revenue Suppression: 12-20%</p>
-                    <p class="text-[10px] mt-2 font-bold uppercase italic opacity-70">Insight: High demand in Toronto is offset by low digital social proof.</p>
-                </div>
-            </div>
-
-            <!-- 4. Spider Chart Section -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-12 border-t-4 border-black pt-12">
-                <div class="flex justify-center">
-                    <svg viewBox="0 0 200 200" class="w-full max-w-[300px]">
-                        <polygon points="100,20 180,75 150,165 50,165 20,75" fill="none" stroke="#ccc" stroke-width="1"/>
-                        <polygon points="100,50 150,85 130,140 70,140 50,85" fill="none" stroke="#ccc" stroke-width="1"/>
-                        <polygon points="100,40 160,80 140,150 80,130 40,85" fill="rgba(34, 197, 94, 0.2)" stroke="#22c55e" stroke-width="3"/>
-                        <text x="100" y="15" text-anchor="middle" class="font-black uppercase text-[8px]">Credentials</text>
-                        <text x="185" y="75" text-anchor="start" class="font-black uppercase text-[8px]">Accessibility</text>
-                        <text x="155" y="175" text-anchor="middle" class="font-black uppercase text-[8px]">Responsiveness</text>
-                        <text x="45" y="175" text-anchor="middle" class="font-black uppercase text-[8px]">Pricing Clarity</text>
-                        <text x="15" y="75" text-anchor="end" class="font-black uppercase text-[8px]">Presentation</text>
-                    </svg>
-                </div>
-                <div>
-                    <h5 class="heading-font text-lg md:text-xl mb-6 leading-tight">Anxious families require humanized trust signals alongside clinical credentials</h5>
-                    <ul class="bullet-list space-y-4 font-bold text-xs md:text-sm uppercase">
-                        <li><strong>Policies & Credentials:</strong> High institutional trust established (5/5).</li>
-                        <li><strong>Communication Accessibility:</strong> Relies on traditional phone/email; lacks self-serve scheduling.</li>
-                        <li><strong>Staff Presentation:</strong> Missing "humanizing" content that autism parents prioritize.</li>
-                        <li><strong>Pricing Clarity:</strong> Opaque until after clinical consult phase.</li>
-                        <li><strong>Feedback Responsiveness:</strong> Limited engagement shapes a passive narrative.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- 5. Temporal Red Zones -->
-            <div class="mb-12 border-t-4 border-black pt-12">
-                <h5 class="heading-font text-xl md:text-2xl mb-8 leading-none">High-intent inquiries are dropping off during critical temporal red zones</h5>
-                <div class="flex h-12 border-4 border-black overflow-hidden mb-6 bg-gray-200">
-                    <div class="w-[20%] bg-black h-full flex items-center justify-center text-white text-[10px] font-black">8:00 AM</div>
-                    <div class="w-[10%] bg-orange-700 h-full border-x-2 border-black"></div>
-                    <div class="w-[15%] bg-black h-full"></div>
-                    <div class="w-[10%] bg-gray-400 h-full border-x-2 border-black"></div>
-                    <div class="w-[15%] bg-black h-full"></div>
-                    <div class="w-[10%] bg-orange-700 h-full border-x-2 border-black"></div>
-                    <div class="w-[20%] bg-black h-full flex items-center justify-center text-white text-[10px] font-black">6:00 PM</div>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 font-black uppercase text-[10px]">
-                    <div class="border-l-4 border-orange-700 pl-4">
-                        <p class="mb-1 text-sm">Monday Morning Triage</p>
-                        <p class="opacity-60">4% loss to "voicemail tag" during initial parent outreach.</p>
-                    </div>
-                    <div class="border-l-4 border-gray-400 pl-4">
-                        <p class="mb-1 text-sm">Mid-Day Session Gap</p>
-                        <p class="opacity-60">Under-utilized facility capacity during staff rotations.</p>
-                    </div>
-                    <div class="border-l-4 border-orange-700 pl-4">
-                        <p class="mb-1 text-sm">After-School Peak</p>
-                        <p class="opacity-60">5% friction churn due to delayed staff responses.</p>
-                    </div>
-                </div>
-                <div class="mt-8 p-4 bg-orange-100 border-2 border-orange-700 flex items-center gap-4">
-                    <svg class="w-8 h-8 flex-shrink-0 text-orange-700" fill="currentColor" viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
-                    <p class="font-black uppercase text-xs"><strong>Mid-August Intake Surge:</strong> 7% loss of school-year placements to faster competitors.</p>
-                </div>
-            </div>
-
-            <!-- 6. Bottom Banner -->
-            <div class="border-t-4 border-black pt-12">
-                <h5 class="heading-font text-xl mb-6">A free website platform creates a credibility gap for high-value clients</h5>
-                <div class="flex items-center gap-8">
-                    <div class="w-1/2">
-                        <p class="font-black uppercase text-xs mb-2">Reputation Rating:</p>
-                        <div class="h-8 w-full border-2 border-black bg-gray-200 relative overflow-hidden">
-                            <div class="h-full bg-green-700 w-[65%]"></div>
-                            <span class="absolute inset-0 flex items-center justify-center font-black text-sm">65/100</span>
-                        </div>
-                    </div>
-                    <div class="flex-1 opacity-60 grayscale">
-                        <div class="border-2 border-black p-2 bg-white text-[10px] mono-font truncate">
-                            https://abaeducator.wixsite.com/home
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-16 text-center mono-font text-[10px] opacity-40 italic border-t-2 border-dashed border-black pt-4">
-                *** CONFIDENTIAL AUDIT OUTPUT // PROPRIETARY ALGORITHM V6.0 ***
-            </div>
+    <!-- SAMPLE AUDIT MODAL (Now pulls from local image file) -->
+    <div id="sampleModal" class="modal-box heavy-border bg-white brutal-shadow w-11/12 max-w-5xl no-select border-black" oncontextmenu="return false;">
+        <div class="p-4 flex justify-between items-center border-b-4 border-black bg-gray-100">
+            <span class="heading-font font-black text-sm px-2">Preview: Audit Excerpt</span>
+            <button onclick="closeAllModals()" class="font-black text-xs uppercase underline hover:opacity-50 px-2">Close [X]</button>
+        </div>
+        <div class="bg-white p-2 overflow-hidden flex justify-center items-start">
+            <!-- Update the src below if your image extension is different (e.g., .jpg) -->
+            <img src="audit_excerpt.png" alt="Audit Excerpt Preview" class="w-full h-auto block border-2 border-black" onerror="this.parentElement.innerHTML='<div class=\'p-20 text-center font-black uppercase text-red-600\'>Image File [audit_excerpt.png] Not Found in Directory.</div>'">
         </div>
     </div>
 
