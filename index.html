@@ -6,12 +6,18 @@
     <title>PROFIT LEAK AUDITOR | NO FRILLS. JUST RESULTS.</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;700;900&family=Space+Mono&display=swap');
+
+        /* RESET & BASE */
+        * {
+            border-radius: 0 !important; /* Force zero rounding for industrial feel */
+        }
 
         body {
-            background-color: #facc15; /* Yellow-400 */
+            background-color: #facc15; /* High-Visibility Yellow */
             color: #000000;
             font-family: 'Inter', sans-serif;
+            line-height: 1.2;
         }
 
         .heading-font {
@@ -19,8 +25,17 @@
             text-transform: uppercase;
         }
 
+        .mono-font {
+            font-family: 'Space Mono', monospace;
+        }
+
+        /* BRUTALIST UI TOKENS */
         .heavy-border {
             border: 4px solid #000000;
+        }
+
+        .thin-border {
+            border: 2px solid #000000;
         }
 
         .brutal-shadow {
@@ -29,11 +44,13 @@
 
         .input-field {
             background: #ffffff;
-            border: 3px solid #000000;
-            padding: 1rem;
+            border: 4px solid #000000;
+            padding: 1.25rem;
             width: 100%;
-            font-weight: 700;
+            font-weight: 900;
             outline: none;
+            font-size: 1.25rem;
+            text-transform: uppercase;
         }
 
         .input-field:focus {
@@ -43,12 +60,12 @@
         .btn-black {
             background: #000000;
             color: #facc15;
-            padding: 1.25rem;
+            padding: 1.5rem;
             font-weight: 900;
             text-transform: uppercase;
-            transition: all 0.1s;
+            transition: all 0.05s;
             cursor: pointer;
-            border: none;
+            border: 4px solid #000000;
         }
 
         .btn-black:disabled {
@@ -57,152 +74,450 @@
         }
 
         .btn-black:active:not(:disabled) {
-            transform: translate(2px, 2px);
+            transform: translate(4px, 4px);
+            box-shadow: none;
         }
 
-        #messageBox {
+        /* STAMPS & LABELS */
+        .engine-stamp {
+            border: 3px dashed #000000;
+            padding: 0.75rem 1.5rem;
+            display: inline-block;
+            font-size: 0.85rem;
+            font-weight: 900;
+            letter-spacing: 0.1em;
+            background: rgba(255,255,255,0.2);
+        }
+
+        .dept-label {
+            background: #000000;
+            color: #facc15;
+            padding: 2px 8px;
+            font-weight: 900;
+            font-size: 0.75rem;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* OVERLAYS */
+        .overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            z-index: 40;
+            backdrop-filter: grayscale(1);
+        }
+
+        .modal-box {
             display: none;
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 50;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
-        .overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.4);
-            z-index: 40;
+        .bullet-list {
+            list-style-type: none;
+            padding-left: 0;
         }
 
-        .engine-stamp {
-            border: 2px dashed #000000;
-            padding: 0.5rem 1rem;
-            display: inline-block;
-            font-size: 0.75rem;
+        .bullet-list li::before {
+            content: ">>";
             font-weight: 900;
-            letter-spacing: 0.05em;
+            margin-right: 0.5rem;
+            color: inherit;
+        }
+
+        .no-select {
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* REPORT SPECIFIC STYLES */
+        .report-bg {
+            background-color: #f4f1ea;
+        }
+        
+        .report-blue {
+            color: #0c2340;
+        }
+
+        .report-orange {
+            color: #c05621;
+        }
+
+        .gauge-border {
+            border-width: 6px;
+            border-style: solid;
         }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center p-4 md:p-8">
 
     <header class="w-full max-w-5xl mt-8 mb-16 text-center">
-        <div class="heading-font text-lg md:text-2xl border-b-4 border-black inline-block mb-4 px-2">
-            Small Business Analysis
-        </div>
-        
-        <h1 class="heading-font text-6xl md:text-9xl lg:text-[11rem] leading-[0.85] tracking-tighter">
+        <!-- Brand Name -->
+        <h1 class="heading-font text-6xl md:text-9xl lg:text-[11rem] leading-[0.8] tracking-tighter mb-10">
             PROFIT LEAK <br> AUDITOR
         </h1>
-        <p class="mt-6 text-xl md:text-3xl font-black uppercase tracking-widest bg-black text-white inline-block px-6 py-1">
-            We find the holes in your pocket.
-        </p>
+
+        <!-- Headline Section -->
+        <div class="max-w-4xl mx-auto space-y-8">
+            <h2 class="heading-font text-3xl md:text-6xl leading-tight border-y-4 border-black py-4">
+                Is Your Business Losing 10–25% of Revenue Without You Knowing?
+            </h2>
+            
+            <div class="bg-black text-white p-6 md:p-8 heavy-border brutal-shadow">
+                <p class="text-lg md:text-2xl font-black uppercase tracking-tight leading-snug">
+                    Hidden friction in your website, marketing, or operations is quietly costing you money.
+                </p>
+            </div>
+
+            <p class="text-xl md:text-3xl font-black uppercase tracking-widest bg-white inline-block px-4 border-2 border-black">
+                We pinpoint exactly where the leaks are and how to recover them.
+            </p>
+        </div>
     </header>
 
-    <main class="w-full max-w-2xl">
-        <div class="heavy-border bg-white p-6 md:p-10 brutal-shadow mb-8">
-            <h2 class="heading-font text-3xl mb-8 border-b-4 border-black pb-2">REQUEST AUDIT</h2>
+    <main class="w-full max-w-2xl space-y-12 mb-20">
+        <!-- FREE SCAN SECTION -->
+        <div class="heavy-border bg-white p-6 md:p-10 brutal-shadow">
+            <div class="mb-10 border-b-8 border-black pb-8">
+                <span class="dept-label">DEPT: DIAGNOSTICS</span>
+                <h3 class="heading-font text-4xl md:text-5xl mb-4 leading-none">Free Business Signal Scan</h3>
+                <p class="font-black uppercase text-xs md:text-sm mb-8 bg-yellow-400 inline-block px-2 border border-black">
+                    Get a Diagnostic Snapshot within 24 hours.
+                </p>
+                
+                <div class="space-y-6">
+                    <div>
+                        <p class="font-black uppercase text-sm mb-4 border-b-2 border-black inline-block">Expected Output:</p>
+                        <ul class="bullet-list font-black uppercase text-xs md:text-sm space-y-3">
+                            <li>Overall Business Signal Score (0–100)</li>
+                            <li>Primary Vulnerability holding back revenue</li>
+                            <li>Biggest opportunity you can act on immediately</li>
+                            <li>One practical fix to start improving today</li>
+                        </ul>
+                    </div>
+
+                    <p class="font-black text-[11px] uppercase opacity-60 bg-gray-100 p-2 border-l-4 border-black">
+                        System Protocol: No forms, no surveys. Just enter business name and website below.
+                    </p>
+                </div>
+            </div>
             
-            <!-- Hidden iframe to handle submission without redirecting away from the page -->
-            <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
-
-            <form id="auditForm" 
-                  action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdH7Pr4AaMyLEX_YjLt3UV8hPK7xy-nZOPz-OmPeH2zv2uWNw/formResponse" 
-                  method="POST" 
-                  target="hidden_iframe">
-                  
+            <form id="auditForm" class="space-y-8">
                 <div>
-                    <label class="block heading-font text-sm mb-2">Business Name</label>
-                    <input type="text" name="entry.1512197485" id="businessName" placeholder="ENTER LEGAL NAME" required class="input-field">
+                    <label class="block heading-font text-sm mb-2">01. Business Name</label>
+                    <input type="text" name="entry.1111111" id="businessName" placeholder="ENTER LEGAL NAME" required class="input-field">
                 </div>
 
                 <div>
-                    <label class="block heading-font text-sm mb-2">Business Website</label>
-                    <input type="text" name="entry.650345227" id="businessWebsite" placeholder="YOURSITE.COM" required class="input-field">
+                    <label class="block heading-font text-sm mb-2">02. Business Website</label>
+                    <input type="text" name="entry.2222222" id="businessWebsite" placeholder="DOMAIN.COM" required class="input-field">
                 </div>
 
                 <div>
-                    <label class="block heading-font text-sm mb-2">Email Address</label>
-                    <input type="email" name="entry.864735466" id="email" placeholder="AUDIT-RESULTS@COMPANY.COM" required class="input-field">
+                    <label class="block heading-font text-sm mb-2">03. Email Address</label>
+                    <input type="email" name="entry.3333333" id="email" placeholder="AUDIT-RESULTS@DIRECT.COM" required class="input-field">
                 </div>
 
                 <div class="pt-4">
-                    <button type="submit" id="submitBtn" class="w-full btn-black text-2xl heading-font">
-                        Start Recovery Analysis
+                    <button type="submit" id="submitBtn" class="w-full btn-black text-3xl heading-font brutal-shadow hover:bg-yellow-400 hover:text-black transition-colors">
+                        Run Free Scan
                     </button>
                 </div>
             </form>
-            
-            <p class="mt-6 text-xs font-bold uppercase text-center opacity-70">
-                * Data is transmitted securely to our audit queue.
-            </p>
         </div>
 
-        <div class="text-center mb-16">
-            <p class="heading-font text-sm mb-2">PLEASE ALLOW 24HRS FOR ANALYSIS TO BE COMPLETED</p>
-            <div class="engine-stamp uppercase">
-                A.I. Proprietary Small Business Analysis Engine v6
+        <!-- FULL AUDIT PRODUCT SECTION -->
+        <div class="heavy-border bg-black text-white p-6 md:p-10 brutal-shadow">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b-4 border-yellow-400 pb-6 mb-8">
+                <div>
+                    <span class="dept-label bg-yellow-400 text-black">DEPT: FULL RECOVERY</span>
+                    <h3 class="heading-font text-4xl text-yellow-400">Full Profit Leak Audit</h3>
+                </div>
+                <div class="bg-yellow-400 text-black px-6 py-2 font-black text-5xl heading-font mt-4 md:mt-0 border-4 border-white shadow-[6px_6px_0px_0px_rgba(255,255,255,0.3)]">
+                    $129
+                </div>
+            </div>
+
+            <div class="space-y-8">
+                <p class="font-black uppercase text-sm border-l-4 border-yellow-400 pl-4">Full system transparency revealed in 7 key areas:</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <ul class="bullet-list font-black uppercase text-xs md:text-sm space-y-3 opacity-90">
+                        <li>Revenue leaks and lost estimates</li>
+                        <li>7-Category Signal Scoring</li>
+                        <li>Website UX & Conversion Friction</li>
+                        <li>Local Search & Map Visibility</li>
+                        <li>Trust & Competitor Comparison</li>
+                        <li>Full ROI Recovery Roadmap</li>
+                    </ul>
+                    <div class="flex flex-col justify-center border-4 border-yellow-400 p-6 bg-yellow-400/10">
+                        <p class="text-yellow-400 font-black text-sm md:text-base uppercase leading-tight italic">
+                            Nearly all businesses we've analyzed have at least one hidden profit leak. What about yours?
+                        </p>
+                        
+                        <div class="mt-8">
+                            <button onclick="openSample()" class="w-full bg-white text-black py-4 px-4 heavy-border brutal-shadow font-black text-sm uppercase hover:bg-yellow-400 transition-all">
+                                Preview Audit Excerpt
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-10 pt-8 border-t-2 border-yellow-400/20 text-center">
+                <p class="text-[11px] font-black uppercase text-yellow-400 tracking-widest">Access Protocol: Full audit unlocked after free snapshot delivery.</p>
+            </div>
+        </div>
+
+        <!-- Tightened Bottom Section -->
+        <div class="text-center flex flex-col items-center gap-6 pb-12">
+            <div class="engine-stamp uppercase mono-font">
+                SYSTEM-STAMP: A.I. PROPRIETARY ANALYSIS ENGINE V6.0
+            </div>
+            <div class="font-black uppercase text-xs tracking-widest bg-black text-yellow-400 px-4 py-2 border-2 border-white">
+                INQUIRIES: <a href="mailto:jasonalves@gmail.com" class="underline hover:text-white transition-colors">auditor@profitleakauditor.com</a>
             </div>
         </div>
     </main>
 
-    <div id="overlay" class="overlay"></div>
-    <div id="messageBox" class="heavy-border bg-white p-8 brutal-shadow w-11/12 max-w-md text-center">
-        <div class="heading-font text-3xl mb-4 text-green-600">SUCCESS.</div>
-        <p class="font-bold mb-4">Your data has been logged. Our analysts are beginning the scan of <span id="displayBizName" class="underline"></span>.</p>
-        <p class="heading-font text-sm mb-6 bg-yellow-400 p-2 inline-block">PLEASE ALLOW 24HRS FOR ANALYSIS TO BE COMPLETED</p>
-        <button onclick="closeMessage()" class="btn-black w-full heading-font">Return to Site</button>
+    <!-- Overlay & Modals -->
+    <div id="overlay" class="overlay" onclick="closeAllModals()"></div>
+
+    <!-- Success Message Box -->
+    <div id="messageBox" class="modal-box heavy-border bg-white p-8 brutal-shadow w-11/12 max-w-lg text-center">
+        <div class="heading-font text-4xl mb-6 text-green-600 border-b-4 border-green-600 pb-2">SCAN SUBMITTED ✅</div>
+        <div class="font-black mb-8 uppercase text-sm md:text-base space-y-6">
+            <p class="bg-black text-white p-2">Your business info is logged.</p>
+            <p class="border-2 border-black p-4">The Diagnostic Scan is now running.</p>
+            <p class="opacity-70 text-xs">Check your email within 24 hours for your Business Signal Snapshot—including your top profit leak and one actionable fix.</p>
+        </div>
+        <button onclick="closeAllModals()" class="btn-black w-full heading-font brutal-shadow">Acknowledged</button>
     </div>
 
-    <footer class="w-full max-w-5xl border-t-4 border-black pt-8 pb-12 flex flex-col md:flex-row justify-between items-center gap-4">
-        <div class="heading-font text-lg">PROFIT LEAK AUDITOR &copy; 2024</div>
-        <div class="flex gap-6 font-bold uppercase text-sm">
-            <span class="cursor-pointer hover:underline">Terms</span>
-            <span class="cursor-pointer hover:underline">Privacy</span>
-            <span class="cursor-pointer hover:underline">Status</span>
+    <!-- SAMPLE AUDIT MODAL (Updated from image) -->
+    <div id="sampleModal" class="modal-box heavy-border report-bg w-11/12 max-w-5xl no-select border-black" oncontextmenu="return false;">
+        <div class="p-4 md:p-12 report-blue">
+            <div class="flex justify-end mb-4">
+                <button onclick="closeAllModals()" class="font-black text-xs uppercase underline hover:opacity-50">Close Report [X]</button>
+            </div>
+
+            <!-- 1. Header Area -->
+            <div class="mb-12 border-b-4 border-black pb-8">
+                <h4 class="heading-font text-3xl md:text-5xl leading-none mb-6">Revenue Recovery Alert <br> for ABA Educator</h4>
+                <div class="flex flex-col md:flex-row gap-8 items-start">
+                    <div class="flex-1">
+                        <div class="report-orange text-7xl md:text-9xl font-black leading-none">$142,000</div>
+                        <p class="font-black uppercase text-xl md:text-2xl mt-[-5px]">Total Annualized Recovery Potential</p>
+                        <div class="mt-8">
+                            <svg viewBox="0 0 400 60" class="w-full opacity-30">
+                                <path d="M0,50 L50,55 L100,45 L150,48 L200,20 L250,25 L300,5 L350,10 L400,0" fill="none" stroke="currentColor" stroke-width="2" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-80 bg-white/50 p-6 border-2 border-black font-bold text-xs md:text-sm italic leading-tight">
+                        <ul class="bullet-list space-y-4">
+                            <li>This represents the profit from 5 full-year therapy contracts currently being lost to competitors due strictly to intake friction.</li>
+                            <li>Conservative Baseline Recovery: $52,000 (1.5 contracts) through friction reduction in the first 90 days.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Bottleneck Analysis -->
+            <div class="mb-12">
+                <h5 class="heading-font text-xl md:text-2xl mb-6">Top-tier clinical competence is bottlenecked by a locked digital front door</h5>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-0 border-4 border-black">
+                    <div class="p-8 bg-green-100/50 border-b-2 md:border-b-0 md:border-r-2 border-black flex flex-col items-center text-center">
+                        <div class="w-16 h-16 bg-black mb-4 flex items-center justify-center text-yellow-400">
+                             <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7v2h20V7l-10-5zM4 11v8h2v-8H4zm5 0v8h2v-8H9zm5 0v8h2v-8h-2zm5 0v8h2v-8h-2zM2 22h20v-2H2v2z"/></svg>
+                        </div>
+                        <p class="font-black uppercase text-lg mb-2">Experience Margin Model</p>
+                        <p class="text-xs mb-4">Prioritizing clinical outcomes and individualized care over transactional volume.</p>
+                        <p class="font-black text-xl">Alignment Score: 4/5</p>
+                    </div>
+                    <div class="p-8 bg-white flex flex-col items-center text-center">
+                        <div class="w-16 h-16 border-4 border-black mb-4 flex items-center justify-center">
+                             <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6z"/></svg>
+                        </div>
+                        <p class="font-black uppercase text-lg mb-2">The Intake Leak</p>
+                        <p class="text-xs mb-4">High-value, long-term contracts are lost annually because parents lack visual trust signals and encounter friction.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Friction Indices -->
+            <div class="mb-12">
+                <h5 class="heading-font text-xl md:text-2xl mb-8">Digital intake friction is actively suppressing 12-20% of potential revenue</h5>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center mb-8">
+                    <div class="flex flex-col items-center">
+                        <div class="w-20 h-20 border-8 border-black flex items-center justify-center font-black text-4xl">B</div>
+                        <p class="mt-2 font-black text-[10px] uppercase">Overall Grade</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-20 h-20 border-8 border-orange-700 flex items-center justify-center font-black text-4xl">54</div>
+                        <p class="mt-2 font-black text-[10px] uppercase">Friction Index</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-20 h-20 border-8 border-green-700 flex items-center justify-center font-black text-4xl">72</div>
+                        <p class="mt-2 font-black text-[10px] uppercase">Opportunity Score</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-20 h-20 border-8 border-orange-500 flex items-center justify-center font-black text-xs px-1">MEDIUM</div>
+                        <p class="mt-2 font-black text-[10px] uppercase">Revenue Risk</p>
+                    </div>
+                </div>
+                <div class="border-4 border-black p-4 bg-white text-center shadow-[8px_8px_0px_0px_#000]">
+                    <p class="font-black text-2xl md:text-4xl uppercase">Estimated Revenue Suppression: 12-20%</p>
+                    <p class="text-[10px] mt-2 font-bold uppercase italic opacity-70">Insight: High demand in Toronto is offset by low digital social proof.</p>
+                </div>
+            </div>
+
+            <!-- 4. Spider Chart Section -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-12 border-t-4 border-black pt-12">
+                <div class="flex justify-center">
+                    <svg viewBox="0 0 200 200" class="w-full max-w-[300px]">
+                        <polygon points="100,20 180,75 150,165 50,165 20,75" fill="none" stroke="#ccc" stroke-width="1"/>
+                        <polygon points="100,50 150,85 130,140 70,140 50,85" fill="none" stroke="#ccc" stroke-width="1"/>
+                        <polygon points="100,40 160,80 140,150 80,130 40,85" fill="rgba(34, 197, 94, 0.2)" stroke="#22c55e" stroke-width="3"/>
+                        <text x="100" y="15" text-anchor="middle" class="font-black uppercase text-[8px]">Credentials</text>
+                        <text x="185" y="75" text-anchor="start" class="font-black uppercase text-[8px]">Accessibility</text>
+                        <text x="155" y="175" text-anchor="middle" class="font-black uppercase text-[8px]">Responsiveness</text>
+                        <text x="45" y="175" text-anchor="middle" class="font-black uppercase text-[8px]">Pricing Clarity</text>
+                        <text x="15" y="75" text-anchor="end" class="font-black uppercase text-[8px]">Presentation</text>
+                    </svg>
+                </div>
+                <div>
+                    <h5 class="heading-font text-lg md:text-xl mb-6 leading-tight">Anxious families require humanized trust signals alongside clinical credentials</h5>
+                    <ul class="bullet-list space-y-4 font-bold text-xs md:text-sm uppercase">
+                        <li><strong>Policies & Credentials:</strong> High institutional trust established (5/5).</li>
+                        <li><strong>Communication Accessibility:</strong> Relies on traditional phone/email; lacks self-serve scheduling.</li>
+                        <li><strong>Staff Presentation:</strong> Missing "humanizing" content that autism parents prioritize.</li>
+                        <li><strong>Pricing Clarity:</strong> Opaque until after clinical consult phase.</li>
+                        <li><strong>Feedback Responsiveness:</strong> Limited engagement shapes a passive narrative.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 5. Temporal Red Zones -->
+            <div class="mb-12 border-t-4 border-black pt-12">
+                <h5 class="heading-font text-xl md:text-2xl mb-8 leading-none">High-intent inquiries are dropping off during critical temporal red zones</h5>
+                <div class="flex h-12 border-4 border-black overflow-hidden mb-6 bg-gray-200">
+                    <div class="w-[20%] bg-black h-full flex items-center justify-center text-white text-[10px] font-black">8:00 AM</div>
+                    <div class="w-[10%] bg-orange-700 h-full border-x-2 border-black"></div>
+                    <div class="w-[15%] bg-black h-full"></div>
+                    <div class="w-[10%] bg-gray-400 h-full border-x-2 border-black"></div>
+                    <div class="w-[15%] bg-black h-full"></div>
+                    <div class="w-[10%] bg-orange-700 h-full border-x-2 border-black"></div>
+                    <div class="w-[20%] bg-black h-full flex items-center justify-center text-white text-[10px] font-black">6:00 PM</div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 font-black uppercase text-[10px]">
+                    <div class="border-l-4 border-orange-700 pl-4">
+                        <p class="mb-1 text-sm">Monday Morning Triage</p>
+                        <p class="opacity-60">4% loss to "voicemail tag" during initial parent outreach.</p>
+                    </div>
+                    <div class="border-l-4 border-gray-400 pl-4">
+                        <p class="mb-1 text-sm">Mid-Day Session Gap</p>
+                        <p class="opacity-60">Under-utilized facility capacity during staff rotations.</p>
+                    </div>
+                    <div class="border-l-4 border-orange-700 pl-4">
+                        <p class="mb-1 text-sm">After-School Peak</p>
+                        <p class="opacity-60">5% friction churn due to delayed staff responses.</p>
+                    </div>
+                </div>
+                <div class="mt-8 p-4 bg-orange-100 border-2 border-orange-700 flex items-center gap-4">
+                    <svg class="w-8 h-8 flex-shrink-0 text-orange-700" fill="currentColor" viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
+                    <p class="font-black uppercase text-xs"><strong>Mid-August Intake Surge:</strong> 7% loss of school-year placements to faster competitors.</p>
+                </div>
+            </div>
+
+            <!-- 6. Bottom Banner -->
+            <div class="border-t-4 border-black pt-12">
+                <h5 class="heading-font text-xl mb-6">A free website platform creates a credibility gap for high-value clients</h5>
+                <div class="flex items-center gap-8">
+                    <div class="w-1/2">
+                        <p class="font-black uppercase text-xs mb-2">Reputation Rating:</p>
+                        <div class="h-8 w-full border-2 border-black bg-gray-200 relative overflow-hidden">
+                            <div class="h-full bg-green-700 w-[65%]"></div>
+                            <span class="absolute inset-0 flex items-center justify-center font-black text-sm">65/100</span>
+                        </div>
+                    </div>
+                    <div class="flex-1 opacity-60 grayscale">
+                        <div class="border-2 border-black p-2 bg-white text-[10px] mono-font truncate">
+                            https://abaeducator.wixsite.com/home
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-16 text-center mono-font text-[10px] opacity-40 italic border-t-2 border-dashed border-black pt-4">
+                *** CONFIDENTIAL AUDIT OUTPUT // PROPRIETARY ALGORITHM V6.0 ***
+            </div>
+        </div>
+    </div>
+
+    <footer class="w-full max-w-5xl border-t-8 border-black pt-6 pb-8 flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="heading-font text-xl font-black">PROFIT LEAK AUDITOR &copy; 2024</div>
+        <div class="flex gap-8 font-black uppercase text-xs opacity-80">
+            <span class="border-x border-black px-4">Secure Data Transmission</span>
+            <span class="border-x border-black px-4">Engine V6.0 Active</span>
         </div>
     </footer>
 
     <script>
         const form = document.getElementById('auditForm');
-        const messageBox = document.getElementById('messageBox');
         const overlay = document.getElementById('overlay');
+        const messageBox = document.getElementById('messageBox');
+        const sampleModal = document.getElementById('sampleModal');
         const submitBtn = document.getElementById('submitBtn');
-        const displayBizName = document.getElementById('displayBizName');
-        const websiteInput = document.getElementById('businessWebsite');
 
-        form.addEventListener('submit', function(e) {
-            // Disable button to prevent double clicks
+        const GOOGLE_FORM_ACTION_URL = "https://docs.google.com/forms/u/0/d/e/YOUR_FORM_ID_HERE/formResponse";
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
             submitBtn.disabled = true;
-            submitBtn.innerText = "TRANSMITTING...";
+            submitBtn.innerText = "INITIALIZING SCAN...";
 
-            const bizName = document.getElementById('businessName').value;
-            let bizWebsite = websiteInput.value.trim();
+            const formData = new FormData(form);
+            const queryString = new URLSearchParams(formData).toString();
+            const submitUrl = `${GOOGLE_FORM_ACTION_URL}?${queryString}`;
 
-            // Sanitize URL before form sends it
-            if (bizWebsite && !/^https?:\/\//i.test(bizWebsite)) {
-                websiteInput.value = 'https://' + bizWebsite;
-            }
-
-            // Update the display name in the success box
-            displayBizName.textContent = bizName;
-
-            // Wait a tiny bit for the iframe to receive the data before showing success
-            setTimeout(() => {
-                messageBox.style.display = 'block';
+            try {
+                await fetch(submitUrl, {
+                    method: 'POST',
+                    mode: 'no-cors'
+                });
                 overlay.style.display = 'block';
+                messageBox.style.display = 'block';
                 form.reset();
+            } catch (error) {
+                overlay.style.display = 'block';
+                messageBox.style.display = 'block';
+                form.reset();
+            } finally {
                 submitBtn.disabled = false;
-                submitBtn.innerText = "Start Recovery Analysis";
-            }, 1000);
+                submitBtn.innerText = "Run Free Scan";
+            }
         });
 
-        function closeMessage() {
-            messageBox.style.display = 'none';
+        function openSample() {
+            overlay.style.display = 'block';
+            sampleModal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAllModals() {
             overlay.style.display = 'none';
+            messageBox.style.display = 'none';
+            sampleModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
         }
     </script>
 </body>
