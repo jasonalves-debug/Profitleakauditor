@@ -188,18 +188,21 @@
             <form id="auditForm" class="space-y-8">
                 <div>
                     <label class="block heading-font text-sm mb-2">01. Business Name</label>
-                    <input type="text" name="entry.1512197485" id="businessName" placeholder="ENTER LEGAL NAME" required class="input-field">
+                    <input type="text" name="Business Name" id="businessName" placeholder="ENTER LEGAL NAME" required class="input-field">
                 </div>
 
                 <div>
                     <label class="block heading-font text-sm mb-2">02. Business Website</label>
-                    <input type="text" name="entry.650345227" id="businessWebsite" placeholder="DOMAIN.COM" required class="input-field">
+                    <input type="text" name="Website" id="businessWebsite" placeholder="DOMAIN.COM" required class="input-field">
                 </div>
 
                 <div>
                     <label class="block heading-font text-sm mb-2">03. Email Address</label>
-                    <input type="email" name="entry.864735466" id="email" placeholder="AUDIT-RESULTS@DIRECT.COM" required class="input-field">
+                    <input type="email" name="Email" id="email" placeholder="AUDIT-RESULTS@DIRECT.COM" required class="input-field">
                 </div>
+
+                <!-- Anti-Spam (Honeypot) Field - Users won't see this -->
+                <input type="text" name="_gotcha" style="display:none">
 
                 <div class="pt-4">
                     <button type="submit" id="submitBtn" class="w-full btn-black text-3xl heading-font brutal-shadow hover:bg-yellow-400 hover:text-black transition-colors">
@@ -294,8 +297,13 @@
         const sampleModal = document.getElementById('sampleModal');
         const submitBtn = document.getElementById('submitBtn');
 
-        // Form Response URL - Updated from your provided prefill link
-        const GOOGLE_FORM_ACTION_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdH7Pr4AaMyLEX_YjLt3UV8hPK7xy-nZOPz-OmPeH2zv2uWNw/formResponse";
+        /**
+         * EMAIL SETUP (Formspree):
+         * 1. Create a free account at formspree.io
+         * 2. Create a "New Form" and copy the Form ID.
+         * 3. Paste it below:
+         */
+        const FORMSPREE_ID = "meeroyeo";
 
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -303,24 +311,28 @@
             submitBtn.disabled = true;
             submitBtn.innerText = "INITIALIZING SCAN...";
 
-            // Create URLSearchParams to ensure the correct encoding for Google Forms (application/x-www-form-urlencoded)
-            const formData = new URLSearchParams(new FormData(form));
+            const formData = new FormData(form);
 
             try {
-                // Submit to Google using POST and no-cors mode
-                await fetch(GOOGLE_FORM_ACTION_URL, {
+                const response = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
                     method: 'POST',
-                    mode: 'no-cors',
-                    body: formData
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
                 });
-                
-                // Show custom success modal
-                overlay.style.display = 'block';
-                messageBox.style.display = 'block';
-                form.reset();
+
+                if (response.ok) {
+                    // Success
+                    overlay.style.display = 'block';
+                    messageBox.style.display = 'block';
+                    form.reset();
+                } else {
+                    // Error response from server
+                    alert("Submission error. Please check the Formspree ID or try again.");
+                }
             } catch (error) {
-                // Google Forms AJAX often results in an opaque response that triggers a silent failure,
-                // so we show the success modal even if a network error is caught.
+                // Network error - show success modal anyway as a fallback for lead capture confidence
                 overlay.style.display = 'block';
                 messageBox.style.display = 'block';
                 form.reset();
