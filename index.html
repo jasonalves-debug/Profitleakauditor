@@ -188,19 +188,16 @@
             <form id="auditForm" class="space-y-8">
                 <div>
                     <label class="block heading-font text-sm mb-2">01. Business Name</label>
-                    <!-- UPDATED ENTRY ID: Business Name -->
                     <input type="text" name="entry.1512197485" id="businessName" placeholder="ENTER LEGAL NAME" required class="input-field">
                 </div>
 
                 <div>
                     <label class="block heading-font text-sm mb-2">02. Business Website</label>
-                    <!-- UPDATED ENTRY ID: Business Website -->
                     <input type="text" name="entry.650345227" id="businessWebsite" placeholder="DOMAIN.COM" required class="input-field">
                 </div>
 
                 <div>
                     <label class="block heading-font text-sm mb-2">03. Email Address</label>
-                    <!-- UPDATED ENTRY ID: Your Email -->
                     <input type="email" name="entry.864735466" id="email" placeholder="AUDIT-RESULTS@DIRECT.COM" required class="input-field">
                 </div>
 
@@ -306,10 +303,11 @@
             submitBtn.disabled = true;
             submitBtn.innerText = "INITIALIZING SCAN...";
 
-            const formData = new FormData(form);
+            // Create URLSearchParams to ensure the correct encoding for Google Forms (application/x-www-form-urlencoded)
+            const formData = new URLSearchParams(new FormData(form));
 
             try {
-                // Submit to Google
+                // Submit to Google using POST and no-cors mode
                 await fetch(GOOGLE_FORM_ACTION_URL, {
                     method: 'POST',
                     mode: 'no-cors',
@@ -321,7 +319,8 @@
                 messageBox.style.display = 'block';
                 form.reset();
             } catch (error) {
-                // Fallback display (Google no-cors often triggers catch)
+                // Google Forms AJAX often results in an opaque response that triggers a silent failure,
+                // so we show the success modal even if a network error is caught.
                 overlay.style.display = 'block';
                 messageBox.style.display = 'block';
                 form.reset();
