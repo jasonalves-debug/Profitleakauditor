@@ -3,293 +3,248 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PROFIT LEAK AUDITOR | JUST RESULTS.</title>
+    <title>LEAK AUDIT | Revenue Recovery</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&family=Syncopate:wght@400;700&family=Space+Mono&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;700;900&family=Space+Mono&display=swap');
-
-        /* RESET & BASE */
-        * {
-            border-radius: 0 !important; /* Force zero rounding for industrial feel */
+        :root {
+            --orange: #FF4D00;
+            --black: #000000;
+            --white: #FFFFFF;
         }
-
         body {
-            background-color: #facc15; /* High-Visibility Yellow */
-            color: #000000;
-            font-family: 'Inter', sans-serif;
-            line-height: 1.2;
+            background-color: var(--black);
+            color: var(--white);
+            font-family: 'Space Grotesk', sans-serif;
+            overflow-x: hidden;
         }
-
-        .heading-font {
-            font-family: 'Archivo Black', sans-serif;
+        h1, h2, h3, .heading-font {
+            font-family: 'Syncopate', sans-serif;
             text-transform: uppercase;
         }
-
-        .mono-font {
+        .mono {
             font-family: 'Space Mono', monospace;
         }
-
-        /* BRUTALIST UI TOKENS */
-        .heavy-border {
-            border: 4px solid #000000;
+        .brutalist-border {
+            border: 4px solid var(--white);
         }
-
-        .brutal-shadow {
-            box-shadow: 8px 8px 0px 0px #000000;
+        .brutalist-border-orange {
+            border: 4px solid var(--orange);
         }
-
-        .input-field {
-            background: #ffffff;
-            border: 4px solid #000000;
-            padding: 1.25rem;
+        .orange-bg {
+            background-color: var(--orange);
+        }
+        .hover-lift:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 8px 8px 0px var(--orange);
+        }
+        .grid-line {
+            background-image: linear-gradient(to right, #222 1px, transparent 1px), linear-gradient(to bottom, #222 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        input::placeholder {
+            color: rgba(0,0,0,0.4);
+        }
+        .scan-line {
+            height: 2px;
+            background: var(--orange);
             width: 100%;
-            font-weight: 900;
-            outline: none;
-            font-size: 1.25rem;
-            text-transform: uppercase;
+            position: absolute;
+            top: 0;
+            left: 0;
+            animation: scan 3s linear infinite;
+            z-index: 20;
+            pointer-events: none;
+        }
+        @keyframes scan {
+            0% { top: 0%; }
+            50% { top: 100%; }
+            100% { top: 0%; }
         }
 
-        .input-field:focus {
-            background: #fef9c3;
-        }
-
-        .btn-black {
-            background: #000000;
-            color: #facc15;
-            padding: 1.5rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            transition: all 0.05s;
-            cursor: pointer;
-            border: 4px solid #000000;
-        }
-
-        .btn-black:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .btn-black:active:not(:disabled) {
-            transform: translate(4px, 4px);
-            box-shadow: none;
-        }
-
-        /* STAMPS & LABELS */
-        .engine-stamp {
-            border: 3px dashed #000000;
-            padding: 0.75rem 1.5rem;
-            display: inline-block;
-            font-size: 0.85rem;
-            font-weight: 900;
-            letter-spacing: 0.1em;
-            background: rgba(255,255,255,0.2);
-        }
-
-        .dept-label {
-            background: #000000;
-            color: #facc15;
-            padding: 2px 8px;
-            font-weight: 900;
-            font-size: 0.75rem;
-            display: inline-block;
-            margin-bottom: 0.5rem;
-        }
-
-        /* OVERLAYS */
-        .overlay {
+        #overlay {
             display: none;
             position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.85);
-            z-index: 40;
-            backdrop-filter: grayscale(1);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 100;
+            backdrop-filter: blur(4px);
         }
-
-        .modal-box {
+        .brutalist-modal {
             display: none;
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            z-index: 50;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .bullet-list {
-            list-style-type: none;
-            padding-left: 0;
-        }
-
-        .bullet-list li::before {
-            content: ">>";
-            font-weight: 900;
-            margin-right: 0.5rem;
-            color: inherit;
-        }
-
-        .no-select {
-            user-select: none;
-            -webkit-user-select: none;
+            z-index: 101;
+            width: 90%;
+            max-width: 600px;
+            background: var(--white);
+            color: var(--black);
+            padding: 40px;
+            border: 8px solid var(--orange);
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center p-4 md:p-8">
+<body class="grid-line">
 
-    <header class="w-full max-w-5xl mt-6 mb-12 text-center">
-        <!-- Brand Name -->
-        <h1 class="heading-font text-5xl md:text-8xl lg:text-[9rem] leading-[0.8] tracking-tighter mb-8">
-            PROFIT LEAK <br> AUDITOR
-        </h1>
+    <!-- OVERLAYS & MODALS -->
+    <div id="overlay" onclick="closeAllModals()"></div>
+    
+    <!-- Success Message Modal -->
+    <div id="messageBox" class="brutalist-modal">
+        <h2 class="text-4xl font-black mb-4 italic">SCAN INITIALIZED.</h2>
+        <p class="text-xl mb-8 font-bold uppercase tracking-tight">Diagnostic signals are being processed. Expect your 24-hour snapshot via the email provided.</p>
+        <button onclick="closeAllModals()" class="w-full bg-black text-white py-4 font-bold uppercase hover:bg-[#FF4D00] transition-colors">Acknowledge</button>
+    </div>
 
-        <div class="max-w-4xl mx-auto">
-            <p class="text-lg md:text-3xl font-black uppercase tracking-widest bg-white inline-block px-4 border-2 border-black py-4 brutal-shadow">
-                We pinpoint your 10–25% revenue leak and show you how to recover it.
-            </p>
+    <!-- Sample Report Modal -->
+    <div id="sampleModal" class="brutalist-modal max-w-2xl overflow-y-auto max-h-[80vh]">
+        <div class="flex justify-between items-start mb-6 border-b-4 border-black pb-4">
+            <h2 class="text-2xl font-bold">SAMPLE_OUTPUT_V2.5</h2>
+            <button onclick="closeAllModals()" class="font-black"> [X] </button>
         </div>
-    </header>
-
-    <main class="w-full max-w-2xl space-y-12 mb-20">
-        
-        <!-- SECTOR MANIFEST LINE -->
-        <div class="text-center mb-[-2rem] relative z-10">
-            <span class="mono-font text-[10px] font-black uppercase bg-black text-yellow-400 px-3 py-1 border-x-4 border-yellow-400">
-                Audit Targets: Food & Bev // Dental // Clinics // Retail // Trades // Prof. Services
-            </span>
+        <div class="mono text-sm space-y-4">
+            <div class="p-4 bg-zinc-100 border-2 border-black">
+                <div class="font-bold text-orange-600">SIGNAL SCORE: 42/100 (CRITICAL)</div>
+                <div>VULNERABILITY: Visual Friction / Perception Decay</div>
+            </div>
+            <p><strong>Primary Issue:</strong> Physical facility signals (signage/exterior) are acting as a hard filter against 18-22% of new acquisition traffic.</p>
+            <p><strong>Opportunity:</strong> Morning/Lunch capacity is under-utilized by 65%. Daytime re-branding could recover $12k-$15k annually.</p>
+            <p><strong>Practical Fix:</strong> Repair exterior lighting and power-wash entrance. Est. Cost: $400. Est. Recovery: $2,500/mo.</p>
         </div>
+        <button onclick="closeAllModals()" class="w-full mt-8 bg-[#FF4D00] text-black py-4 font-bold uppercase border-4 border-black">Close Sample</button>
+    </div>
 
-        <!-- FREE SCAN SECTION -->
-        <div class="heavy-border bg-white p-6 md:p-10 brutal-shadow relative">
-            <div class="mb-10 border-b-8 border-black pb-8">
-                <span class="dept-label">DEPT: DIAGNOSTICS</span>
-                <h3 class="heading-font text-4xl md:text-5xl mb-4 leading-none">Free Business Signal Scan</h3>
-                <p class="font-black uppercase text-xs md:text-sm mb-8 bg-yellow-400 inline-block px-2 border border-black">
-                    Get a Diagnostic Snapshot within 24 hours.
-                </p>
+    <!-- NAVIGATION -->
+    <nav class="fixed top-0 w-full z-50 bg-black border-b-4 border-white px-6 py-4 flex justify-between items-center">
+        <div class="text-2xl font-bold tracking-tighter uppercase">Leak<span class="text-[#FF4D00]">Audit</span></div>
+        <div class="flex space-x-4 md:space-x-8 font-bold uppercase text-xs tracking-widest">
+            <button onclick="openSample()" class="hidden md:block hover:text-[#FF4D00]">View Sample</button>
+            <a href="#scan-section" class="orange-bg text-black px-4 py-1 hover:bg-white transition-colors">Scan Now</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="min-h-screen flex flex-col justify-center items-start pt-32 px-6 md:px-20 border-b-4 border-white">
+        <div class="max-w-7xl mx-auto w-full">
+            <h1 class="text-5xl md:text-8xl font-bold leading-none mb-8 tracking-tighter">
+                WE PINPOINT YOUR <br>
+                <span class="text-[#FF4D00]">10–25% REVENUE LEAK</span> <br>
+                AND RECOVER IT.
+            </h1>
+            <div class="grid md:grid-cols-2 gap-12 items-start">
+                <div>
+                    <p class="text-xl md:text-2xl max-w-xl font-light opacity-80 border-l-4 border-[#FF4D00] pl-6 mb-8">
+                        Stop the bleed. We identify the specific friction points causing your business to drop up to a quarter of its potential earnings.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#scan-section" class="orange-bg text-black text-xl md:text-2xl font-bold px-8 py-4 hover-lift transition-all uppercase">
+                            Run Free Scan
+                        </a>
+                        <button onclick="openSample()" class="brutalist-border text-white text-lg md:text-xl font-bold px-8 py-4 hover:bg-white hover:text-black transition-all uppercase">
+                            View Sample
+                        </button>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                   <div class="mono text-xs opacity-40 uppercase space-y-2 border-t border-zinc-800 pt-4">
+                        <div>// SYSTEM_READY</div>
+                        <div>// NO_FORMS_REQUIRED</div>
+                        <div>// 24HR_DELIVERY_GUARANTEE</div>
+                   </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SCAN SECTION -->
+    <section id="scan-section" class="py-24 px-6 md:px-20 bg-black">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-20">
                 
-                <div class="space-y-6">
-                    <div>
-                        <p class="font-black uppercase text-sm mb-4 border-b-2 border-black inline-block">Expected Output:</p>
-                        <ul class="bullet-list font-black uppercase text-xs md:text-sm space-y-3">
-                            <li>Overall Business Signal Score (0–100)</li>
-                            <li>Primary Vulnerability holding back revenue</li>
-                            <li>Biggest opportunity you can act on immediately</li>
-                            <li>One practical fix to start improving today</li>
+                <!-- LEFT: THE OFFER -->
+                <div>
+                    <h2 class="text-4xl md:text-6xl font-bold mb-8 leading-tight">FREE BUSINESS <br><span class="text-[#FF4D00]">SIGNAL SCAN</span></h2>
+                    <p class="text-xl mb-12 opacity-80">Get a Diagnostic Snapshot within 24 hours. No forms, no surveys. Just enter business name and website below.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="text-xs uppercase tracking-widest text-[#FF4D00] font-bold mb-4 mono">Expected Output:</div>
+                        <ul class="space-y-4 mono text-sm md:text-base">
+                            <li class="flex items-start">
+                                <span class="text-[#FF4D00] mr-4">[+]</span>
+                                <span>Overall Business Signal Score (0–100)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[#FF4D00] mr-4">[+]</span>
+                                <span>Primary Vulnerability holding back revenue</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[#FF4D00] mr-4">[+]</span>
+                                <span>Biggest opportunity you can act on immediately</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[#FF4D00] mr-4">[+]</span>
+                                <span>One practical fix to start improving today</span>
+                            </li>
                         </ul>
                     </div>
-                    <p class="font-black text-[11px] uppercase opacity-60 bg-gray-100 p-2 border-l-4 border-black">
-                        No forms, no surveys. Just enter business name and website below.
-                    </p>
-                </div>
-            </div>
-            
-            <form id="auditForm" class="space-y-8">
-                <div>
-                    <label class="block heading-font text-sm mb-2">01. Business Name</label>
-                    <input type="text" name="Business Name" id="businessName" placeholder="ENTER LEGAL NAME" required class="input-field">
                 </div>
 
-                <div>
-                    <label class="block heading-font text-sm mb-2">02. Business Website</label>
-                    <input type="text" name="Website" id="businessWebsite" placeholder="DOMAIN.COM" required class="input-field">
-                </div>
-
-                <div>
-                    <label class="block heading-font text-sm mb-2">03. Email Address</label>
-                    <input type="email" name="Email" id="email" placeholder="AUDIT-RESULTS@DIRECT.COM" required class="input-field">
-                </div>
-
-                <!-- Anti-Spam Field -->
-                <input type="text" name="_gotcha" style="display:none">
-
-                <div class="pt-4">
-                    <button type="submit" id="submitBtn" class="w-full btn-black text-3xl heading-font brutal-shadow hover:bg-yellow-400 hover:text-black transition-colors">
-                        Run Free Scan
-                    </button>
-                </div>
-            </form>
-        </div>
-
-        <!-- FULL AUDIT SECTION -->
-        <div class="heavy-border bg-black text-white p-6 md:p-10 brutal-shadow">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b-4 border-yellow-400 pb-6 mb-8">
-                <div>
-                    <span class="dept-label bg-yellow-400 text-black">DEPT: FULL RECOVERY</span>
-                    <h3 class="heading-font text-4xl text-yellow-400">Full Profit Leak Audit</h3>
-                </div>
-                <div class="bg-yellow-400 text-black px-6 py-2 font-black text-5xl heading-font mt-4 md:mt-0 border-4 border-white shadow-[6px_6px_0px_0px_rgba(255,255,255,0.3)]">
-                    $129
-                </div>
-            </div>
-            <div class="space-y-8">
-                <p class="font-black uppercase text-sm border-l-4 border-yellow-400 pl-4">Full system transparency revealed in 7 key areas:</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                    <ul class="bullet-list font-black uppercase text-xs md:text-sm space-y-3 opacity-90">
-                        <li>Revenue leaks and lost estimates</li>
-                        <li>7-Category Signal Scoring</li>
-                        <li>Website UX & Conversion Friction</li>
-                        <li>Local Search & Map Visibility</li>
-                        <li>Trust & Competitor Comparison</li>
-                        <li>Full ROI Recovery Roadmap</li>
-                    </ul>
-                    <div class="flex flex-col justify-center border-4 border-yellow-400 p-6 bg-yellow-400/10">
-                        <p class="text-yellow-400 font-black text-sm md:text-base uppercase leading-tight italic">
-                            Nearly all businesses we've analyzed have at least one hidden profit leak. What about yours?
-                        </p>
-                        <div class="mt-8">
-                            <button onclick="openSample()" class="w-full bg-white text-black py-4 px-4 heavy-border brutal-shadow font-black text-sm uppercase hover:bg-yellow-400 transition-all">
-                                Preview Audit Excerpt
-                            </button>
+                <!-- RIGHT: THE FORM -->
+                <div class="relative">
+                    <div class="brutalist-border p-8 md:p-12 bg-zinc-950 relative overflow-hidden">
+                        <div class="scan-line"></div>
+                        <div class="mb-8 border-b border-zinc-800 pb-4">
+                            <h3 class="text-xl font-bold mb-2 uppercase tracking-tighter">Diagnostic Input</h3>
+                            <p class="text-xs mono opacity-50 uppercase tracking-widest italic">Signal capture active...</p>
                         </div>
+                        
+                        <form id="auditForm" class="space-y-8">
+                            <div>
+                                <label class="block text-xs uppercase mono mb-2 opacity-50">Business Name</label>
+                                <input type="text" name="business_name" required placeholder="ENTITY_NAME_HERE" class="w-full bg-transparent border-b-4 border-white p-4 text-2xl uppercase font-bold focus:outline-none focus:border-[#FF4D00] transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase mono mb-2 opacity-50">Website URL</label>
+                                <input type="text" name="website" required placeholder="WWW.BUSINESS.COM" class="w-full bg-transparent border-b-4 border-white p-4 text-2xl uppercase font-bold focus:outline-none focus:border-[#FF4D00] transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase mono mb-2 opacity-50">Delivery Email</label>
+                                <input type="email" name="email" required placeholder="EXEC@BUSINESS.COM" class="w-full bg-transparent border-b-4 border-white p-4 text-2xl uppercase font-bold focus:outline-none focus:border-[#FF4D00] transition-colors">
+                            </div>
+                            
+                            <button id="submitBtn" type="submit" class="w-full orange-bg text-black text-2xl font-bold py-6 hover:bg-white transition-all uppercase shadow-[8px_8px_0px_rgba(255,255,255,1)] hover:shadow-none">
+                                Run Free Scan
+                            </button>
+                        </form>
                     </div>
                 </div>
-            </div>
-            <div class="mt-10 pt-8 border-t-2 border-yellow-400/20 text-center">
-                <p class="text-[11px] font-black uppercase text-yellow-400 tracking-widest">Full audit unlocked after free snapshot delivery.</p>
+
             </div>
         </div>
+    </section>
 
-        <div class="text-center flex flex-col items-center gap-6 pb-12">
-            <div class="engine-stamp uppercase mono-font">
-                A.I. PROPRIETARY ANALYSIS ENGINE V6.0
+    <!-- FOOTER -->
+    <footer class="bg-black py-12 px-6 border-t-4 border-white">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center">
+            <div class="mb-8 md:mb-0">
+                <div class="text-2xl font-bold tracking-tighter uppercase">Leak<span class="text-[#FF4D00]">Audit</span></div>
+                <div class="text-[10px] mono opacity-50 mt-2 uppercase tracking-widest">Revenue Risk Mitigation Unit</div>
             </div>
-            <div class="font-black uppercase text-xs tracking-widest bg-black text-yellow-400 px-4 py-2 border-2 border-white">
-                INQUIRIES: <a href="javascript:void(0)" onclick="handleContact(event)" id="contact-link" class="underline hover:text-white transition-colors">CLICK TO REVEAL EMAIL</a>
+            
+            <div class="flex flex-col md:items-end space-y-4">
+                <div class="text-[10px] mono opacity-50 uppercase space-y-1 text-left md:text-right">
+                    <div>Proprietary Algorithm v.2.5</div>
+                    <div>24hr Signal Guarantee</div>
+                </div>
+                <a href="#" id="contact-link" onclick="handleContact(event)" class="text-xs font-bold uppercase hover:text-[#FF4D00] border-b-2 border-white pb-1">
+                    [ CLICK TO REVEAL CONTACT ]
+                </a>
             </div>
-        </div>
-    </main>
-
-    <!-- OVERLAYS -->
-    <div id="overlay" class="overlay" onclick="closeAllModals()"></div>
-
-    <!-- SUCCESS MODAL -->
-    <div id="messageBox" class="modal-box heavy-border bg-white p-8 brutal-shadow w-11/12 max-lg text-center">
-        <div class="heading-font text-4xl mb-6 text-green-600 border-b-4 border-green-600 pb-2">SCAN SUBMITTED ✅</div>
-        <div class="font-black mb-8 uppercase text-sm md:text-base space-y-6">
-            <p class="bg-black text-white p-2">Your business info is logged.</p>
-            <p class="border-2 border-black p-4">The Diagnostic Scan is now running.</p>
-            <p class="opacity-70 text-xs">Check your email within 24 hours for your Business Signal Snapshot—including your top profit leak and one actionable fix.</p>
-        </div>
-        <button onclick="closeAllModals()" class="btn-black w-full heading-font brutal-shadow">Acknowledged</button>
-    </div>
-
-    <!-- AUDIT EXCERPT PREVIEW MODAL -->
-    <div id="sampleModal" class="modal-box heavy-border bg-white brutal-shadow w-11/12 max-w-5xl no-select border-black" oncontextmenu="return false;">
-        <div class="p-4 flex justify-between items-center border-b-4 border-black bg-gray-100">
-            <span class="heading-font font-black text-sm px-2">Preview: Audit Excerpt</span>
-            <button onclick="closeAllModals()" class="font-black text-xs uppercase underline hover:opacity-50 px-2">Close [X]</button>
-        </div>
-        <div class="bg-white p-2 overflow-hidden flex justify-center items-start">
-            <!-- This looks for audit_excerpt.png in the same folder as this HTML file -->
-            <img src="audit_excerpt.png" alt="Audit Excerpt Preview" class="w-full h-auto block border-2 border-black" onerror="this.parentElement.innerHTML='<div class=\'p-20 text-center font-black uppercase text-red-600\'>Image File [audit_excerpt.png] Not Found in same folder.</div>'">
-        </div>
-    </div>
-
-    <footer class="w-full max-w-5xl border-t-8 border-black pt-6 pb-8 flex flex-col md:flex-row justify-between items-center gap-6">
-        <div class="heading-font text-xl font-black">PROFIT LEAK AUDITOR &copy; 2024</div>
-        <div class="flex gap-8 font-black uppercase text-xs opacity-80">
-            <span class="border-x border-black px-4">Secure Data Transmission</span>
-            <span class="border-x border-black px-4">Engine V6.0 Active</span>
         </div>
     </footer>
 
@@ -300,7 +255,6 @@
         const sampleModal = document.getElementById('sampleModal');
         const submitBtn = document.getElementById('submitBtn');
 
-        // Email Link Protection
         function handleContact(e) {
             e.preventDefault();
             const u = 'jasonalves';
@@ -314,7 +268,6 @@
             }
         }
 
-        // Formspree Integration
         const FORMSPREE_ID = "meeroyeo";
 
         form.addEventListener('submit', async function(e) {
@@ -335,7 +288,7 @@
                     messageBox.style.display = 'block';
                     form.reset();
                 } else {
-                    alert("Submission error. Please check connection.");
+                    console.error("Submission error");
                 }
             } catch (error) {
                 overlay.style.display = 'block';
@@ -362,4 +315,3 @@
     </script>
 </body>
 </html>
-
