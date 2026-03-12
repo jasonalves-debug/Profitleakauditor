@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PROFIT LEAK AUDITOR™ | NO FRILLS. JUST RESULTS.</title>
+    <title>PROFIT LEAK AUDITOR | NO FRILLS. JUST RESULTS.</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;700;900&family=Space+Mono&display=swap');
@@ -137,30 +137,28 @@
 <body class="min-h-screen flex flex-col items-center p-4 md:p-8">
 
     <header class="w-full max-w-5xl mt-6 mb-12 text-center">
+        <!-- Brand Name -->
         <h1 class="heading-font text-5xl md:text-8xl lg:text-[9rem] leading-[0.8] tracking-tighter mb-8">
-            PROFIT LEAK <br> AUDITOR<span class="text-lg md:text-xl align-top ml-1">™</span>
+            PROFIT LEAK <br> AUDITOR
         </h1>
 
-        <div class="max-w-4xl mx-auto space-y-6">
-            <div class="bg-black text-white p-6 md:p-10 heavy-border brutal-shadow">
-                <p class="text-xl md:text-3xl font-black uppercase tracking-tight leading-snug">
-                    Is hidden friction in your website, marketing, or operations costing you 10–25% of revenue without you knowing?
-                </p>
-            </div>
-            <p class="text-lg md:text-2xl font-black uppercase tracking-widest bg-white inline-block px-4 border-2 border-black">
-                We pinpoint the leaks and show you how to recover them.
+        <div class="max-w-4xl mx-auto">
+            <p class="text-lg md:text-3xl font-black uppercase tracking-widest bg-white inline-block px-4 border-2 border-black py-4 brutal-shadow">
+                We pinpoint your 10–25% revenue leak and show you how to recover it.
             </p>
         </div>
     </header>
 
     <main class="w-full max-w-2xl space-y-12 mb-20">
         
+        <!-- SECTOR MANIFEST LINE -->
         <div class="text-center mb-[-2rem] relative z-10">
             <span class="mono-font text-[10px] font-black uppercase bg-black text-yellow-400 px-3 py-1 border-x-4 border-yellow-400">
                 Audit Targets: Food & Bev // Dental // Clinics // Retail // Trades // Prof. Services
             </span>
         </div>
 
+        <!-- FREE SCAN SECTION -->
         <div class="heavy-border bg-white p-6 md:p-10 brutal-shadow relative">
             <div class="mb-10 border-b-8 border-black pb-8">
                 <span class="dept-label">DEPT: DIAGNOSTICS</span>
@@ -201,7 +199,7 @@
                     <input type="email" name="Email" id="email" placeholder="AUDIT-RESULTS@DIRECT.COM" required class="input-field">
                 </div>
 
-                <!-- Anti-Spam (Honeypot) Field - Users won't see this -->
+                <!-- Anti-Spam Field -->
                 <input type="text" name="_gotcha" style="display:none">
 
                 <div class="pt-4">
@@ -212,6 +210,7 @@
             </form>
         </div>
 
+        <!-- FULL AUDIT SECTION -->
         <div class="heavy-border bg-black text-white p-6 md:p-10 brutal-shadow">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b-4 border-yellow-400 pb-6 mb-8">
                 <div>
@@ -255,13 +254,15 @@
                 A.I. PROPRIETARY ANALYSIS ENGINE V6.0
             </div>
             <div class="font-black uppercase text-xs tracking-widest bg-black text-yellow-400 px-4 py-2 border-2 border-white">
-                INQUIRIES: <a href="mailto:jasonalves@gmail.com" class="underline hover:text-white transition-colors">auditor@profitleakauditor.com</a>
+                INQUIRIES: <a href="javascript:void(0)" onclick="handleContact(event)" id="contact-link" class="underline hover:text-white transition-colors">CLICK TO REVEAL EMAIL</a>
             </div>
         </div>
     </main>
 
+    <!-- OVERLAYS -->
     <div id="overlay" class="overlay" onclick="closeAllModals()"></div>
 
+    <!-- SUCCESS MODAL -->
     <div id="messageBox" class="modal-box heavy-border bg-white p-8 brutal-shadow w-11/12 max-lg text-center">
         <div class="heading-font text-4xl mb-6 text-green-600 border-b-4 border-green-600 pb-2">SCAN SUBMITTED ✅</div>
         <div class="font-black mb-8 uppercase text-sm md:text-base space-y-6">
@@ -272,13 +273,15 @@
         <button onclick="closeAllModals()" class="btn-black w-full heading-font brutal-shadow">Acknowledged</button>
     </div>
 
+    <!-- AUDIT EXCERPT PREVIEW MODAL -->
     <div id="sampleModal" class="modal-box heavy-border bg-white brutal-shadow w-11/12 max-w-5xl no-select border-black" oncontextmenu="return false;">
         <div class="p-4 flex justify-between items-center border-b-4 border-black bg-gray-100">
             <span class="heading-font font-black text-sm px-2">Preview: Audit Excerpt</span>
             <button onclick="closeAllModals()" class="font-black text-xs uppercase underline hover:opacity-50 px-2">Close [X]</button>
         </div>
         <div class="bg-white p-2 overflow-hidden flex justify-center items-start">
-            <img src="audit_excerpt.png" alt="Audit Excerpt Preview" class="w-full h-auto block border-2 border-black" onerror="this.parentElement.innerHTML='<div class=\'p-20 text-center font-black uppercase text-red-600\'>Image File [audit_excerpt.png] Not Found.</div>'">
+            <!-- This looks for audit_excerpt.png in the same folder as this HTML file -->
+            <img src="audit_excerpt.png" alt="Audit Excerpt Preview" class="w-full h-auto block border-2 border-black" onerror="this.parentElement.innerHTML='<div class=\'p-20 text-center font-black uppercase text-red-600\'>Image File [audit_excerpt.png] Not Found in same folder.</div>'">
         </div>
     </div>
 
@@ -297,42 +300,44 @@
         const sampleModal = document.getElementById('sampleModal');
         const submitBtn = document.getElementById('submitBtn');
 
-        /**
-         * EMAIL SETUP (Formspree):
-         * 1. Create a free account at formspree.io
-         * 2. Create a "New Form" and copy the Form ID.
-         * 3. Paste it below:
-         */
+        // Email Link Protection
+        function handleContact(e) {
+            e.preventDefault();
+            const u = 'jasonalves';
+            const d = 'gmail.com';
+            const addr = u + '@' + d;
+            const link = document.getElementById('contact-link');
+            if (link.innerText === addr.toUpperCase()) {
+                window.location.href = 'mailto:' + addr;
+            } else {
+                link.innerText = addr.toUpperCase();
+            }
+        }
+
+        // Formspree Integration
         const FORMSPREE_ID = "meeroyeo";
 
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
-            
             submitBtn.disabled = true;
             submitBtn.innerText = "INITIALIZING SCAN...";
-
             const formData = new FormData(form);
 
             try {
                 const response = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
                     method: 'POST',
                     body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
+                    headers: { 'Accept': 'application/json' }
                 });
 
                 if (response.ok) {
-                    // Success
                     overlay.style.display = 'block';
                     messageBox.style.display = 'block';
                     form.reset();
                 } else {
-                    // Error response from server
-                    alert("Submission error. Please check the Formspree ID or try again.");
+                    alert("Submission error. Please check connection.");
                 }
             } catch (error) {
-                // Network error - show success modal anyway as a fallback for lead capture confidence
                 overlay.style.display = 'block';
                 messageBox.style.display = 'block';
                 form.reset();
